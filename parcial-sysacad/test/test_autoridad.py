@@ -60,22 +60,18 @@ class AutoridadTestCase(unittest.TestCase):
         materia1 = nuevamateria(nombre="Matematica")
         materia2 = nuevamateria(nombre="Fisica")
 
-        # Asociar materias desde autoridad.materias 
         autoridad.materias.append(materia1)
         autoridad.materias.append(materia2)
         db.session.commit()
 
-        # Recargar la autoridad de la base de datos
         autoridad_db = AutoridadService.buscar_por_id(autoridad.id)
         
         self.assertIn(materia1, autoridad_db.materias)
         self.assertIn(materia2, autoridad_db.materias)
 
-        # Desasociar una materia
         autoridad_db.materias.remove(materia1)
         db.session.commit()
         
-        # Verificar que se desasoció correctamente
         autoridad_actualizada = AutoridadService.buscar_por_id(autoridad.id)
         self.assertNotIn(materia1, autoridad_actualizada.materias)
 
@@ -83,14 +79,12 @@ class AutoridadTestCase(unittest.TestCase):
         autoridad = nuevaautoridad()
         materia = nuevamateria()
 
-        # Asociar materia
         resultado = AutoridadService.asociar_materia(autoridad.id, materia.id)
         self.assertTrue(resultado)
         
         autoridad_actualizada = AutoridadService.buscar_por_id(autoridad.id)
         self.assertIn(materia, autoridad_actualizada.materias)
 
-        # Desasociar materia
         resultado = AutoridadService.desasociar_materia(autoridad.id, materia.id)
         self.assertTrue(resultado)
         
@@ -101,14 +95,12 @@ class AutoridadTestCase(unittest.TestCase):
         facultad = nuevafacultad()
         autoridad = nuevaautoridad()
 
-        # Asociar facultad
         resultado = AutoridadService.asociar_facultad(autoridad.id, facultad.id)
         self.assertTrue(resultado)
         
         autoridad_actualizada = AutoridadService.buscar_por_id(autoridad.id)
         self.assertIn(facultad, autoridad_actualizada.facultades)
 
-        # Desasociar facultad
         resultado = AutoridadService.desasociar_facultad(autoridad.id, facultad.id)
         self.assertTrue(resultado)
         

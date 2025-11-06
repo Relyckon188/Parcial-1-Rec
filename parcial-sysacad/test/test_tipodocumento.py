@@ -21,7 +21,7 @@ class TipoDocumentoTestCase(unittest.TestCase):
         self.app_context.pop()
 
     def test_crear(self):
-        tipodocumento = nuevotipodocumento()  # crea y guarda un tipo documento
+        tipodocumento = nuevotipodocumento()
         self.assertIsNotNone(tipodocumento)
         self.assertIsNotNone(tipodocumento.id)
         self.assertGreaterEqual(tipodocumento.id, 1)

@@ -1,4 +1,3 @@
-# tests/test_especialidad_alumnos.py
 import unittest
 from app import create_app, db
 from app.models import Especialidad, Facultad, Alumno, Usuario
